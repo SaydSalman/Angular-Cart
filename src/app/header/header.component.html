@@ -1,0 +1,30 @@
+<nav style="z-index: 5;" class="navbar navbar-expand-lg w-100 top-0 position-fixed ">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="" ><i class="fa-solid fa-cart-shopping me-1"></i>ShopLify</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <input class="form-control me-2" style="width: 400px;" type="search" placeholder="Search by Product Name..." aria-label="Search">
+          </li>
+          <li class="nav-item ">
+
+            <button routerLink="wishlist" class="btn btn-outline-success d-flex gap-2" type="submit"><i class="fa-solid fa-heart text-danger"></i>Wishlist <span class="badge bg-dark">0</span></button>
+          </li>
+          <li class="nav-item ms-2">
+
+            <button class="btn btn-outline-dark d-flex gap-2" type="submit"><i class="fa-solid fa-heart text-danger"></i>Cart <span class="badge bg-dark">0</span></button>
+          </li>
+          <li class="nav-item ms-2 mt-2 ">
+
+           <a class="text-decoration-none text-dark" routerLink="login"><i class="fa-solid fa-user"></i>Login</a>
+          </li>
+          
+          
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
