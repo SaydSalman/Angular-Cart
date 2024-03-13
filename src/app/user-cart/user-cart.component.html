@@ -1,1 +1,69 @@
-<p>user-cart works!</p>
+<app-header></app-header>
+<section class="py-5">
+    <div class="text-center m-5">
+        
+    </div>
+    <div class="container px-4 px-lg-5 ">
+        <div *ngIf="allProducts.length==0" class="d-flex justify-content-center align-items-center text-danger flex-column">
+            <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-4816550-4004141.png" alt="">
+            <h1>Your Cart is empty</h1>
+        </div>
+        <div *ngIf="allProducts.length!=0" class="container px-4 px-lg-5 mt-5">
+            <h1 class="text-primary">Your Cart !!</h1>
+            <div class="row mt-5 ">
+                <div class="col-lg-8">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-center">Product</th>
+                                <th class="text-center">Image</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">...</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of allProducts;let i=index">
+                                <td>{{i+1}}</td>
+                                <td class="text-truncate" style="max-width: 150px;">{{product.title}}</td>
+                                <td><img width="60px" height="60px" [src]="product.image" alt=""></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button (click)="decrementQuantity(product._id)"  style="width: 60px;" class="btn btn-primary">-</button>
+                                        <input type="text" style="width: 60px; " class="form-control text-center" [value]="product.quantity">
+                                        <button (click)="incrementQuantity(product._id)" style="width: 60px;" class="btn btn-primary">+</button>
+                                    </div>
+                                </td>
+                                <td>{{product.totalPrice}}</td>
+                                <td><button (click)="deleteItem(product._id)" class="btn"><i class="fa-solid fa-trash text-danger"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="float-end mt-2">
+                        <button (click)="emptyCart()" class="btn btn-danger">EMPTY CART</button>
+                        <button routerLink="" class="btn btn-success ms-3">SHOP MORE</button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="rounded border p-3">
+                        <h3>Total Cart:<span class="text-danger">${{cartTotalPrice}}</span></h3>
+                        <h6 *ngIf="!couponStatus" (click)="getCoupon()" class="mt-3">Click here to View <span class="btn btn-primary-subtle"></span><i class="fa-solid fa-tag"> </i>Offers</h6>
+                        <!-- gift coupons -->
+                        <div *ngIf="couponStatus" class="d-flex justify-content-evenly">
+                            <ng-container *ngIf="cartTotalPrice>=50 && cartTotalPrice<=250 && !couponClickStatus" ><img (click)="discount10()"  width="90px" height="90px" src="https://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Black-Friday-PNG/Black_Friday_Save_Coupon_PNG_Clipart_Image.png?m=1438397702" alt=""></ng-container>
+                            <ng-container *ngIf="cartTotalPrice>=500 && !couponClickStatus"><img (click)="discount50()" width="90px" height="90px" src="https://img.lovepik.com/free-png/20220125/lovepik-promotional-coupons-png-image_401731828_wh1200.png" alt=""></ng-container>
+                           <ng-container *ngIf="cartTotalPrice>=250 && cartTotalPrice<=500 && !couponClickStatus" > <img (click)="discount20()"  width="90px" height="90px" src="https://i.pinimg.com/474x/66/85/cd/6685cd99a88c085c33e655ac9142060b.jpg" alt=""></ng-container>
+                            
+                        </div>
+                        <hr class="mt-5">
+                        <div class="d-grid">
+                            <button (click)="checkout()" class="btn btn-success">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -6,21 +6,28 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <input class="form-control me-2" style="width: 400px;" type="search" placeholder="Search by Product Name..." aria-label="Search">
+          <li class="nav-item d-flex">
+            <input (keyup)="getSearchTerm($event)"  class="form-control me-2" style="width: 400px;" type="search" placeholder="Search by Product Name..." aria-label="Search">
+            <button class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
           </li>
           <li class="nav-item ">
 
-            <button routerLink="wishlist" class="btn btn-outline-success d-flex gap-2" type="submit"><i class="fa-solid fa-heart text-danger"></i>Wishlist <span class="badge bg-dark">0</span></button>
+            <button routerLink="/wishlist" class="btn btn-outline-success d-flex gap-2" type="submit"><i class="fa-solid fa-heart text-danger"></i>Wishlist <span class="badge bg-dark">{{wishlistCount}}</span></button>
           </li>
           <li class="nav-item ms-2">
 
-            <button class="btn btn-outline-dark d-flex gap-2" type="submit"><i class="fa-solid fa-heart text-danger"></i>Cart <span class="badge bg-dark">0</span></button>
+            <button routerLink="/cart" class="btn btn-outline-dark d-flex gap-2" type="submit"><i class="fa-solid fa-heart text-danger"></i>Cart <span class="badge bg-dark">{{cartCount}}</span></button>
           </li>
-          <li class="nav-item ms-2 mt-2 ">
+          <li *ngIf="!loginUsername" class="nav-item ms-2 mt-2 ">
 
-           <a class="text-decoration-none text-dark" routerLink="login"><i class="fa-solid fa-user"></i>Login</a>
+           <a  class="text-decoration-none text-dark" routerLink="login"><i class="fa-solid fa-user"></i>Login</a>
           </li>
+          <li *ngIf="loginUsername" class="nav-item ms-2 mt-2 ">
+
+           <a  class="text-decoration-none text-dark" ><i class="fa-solid fa-user"></i>{{loginUsername}}</a>
+           <button style="margin-top: -10px;" (click)="logout()" class="btn btn-primary">Logout</button>
+          </li>
+          
           
           
         </ul>

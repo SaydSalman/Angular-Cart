@@ -1,29 +1,33 @@
+<app-header></app-header>
 <section class="py-5">
     <div class="text-center m-5">
         <h3>Your Wishlist!!!</h3>
     </div>
     <div class="container px-4 px-lg-5 ">
-        
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div *ngIf="allProducts.length==0" class="d-flex justify-content-center align-items-center text-danger flex-column">
+            <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-4816550-4004141.png" alt="">
+            <h1>Your Wishlist is empty</h1>
+        </div>
+        <div *ngIf="allProducts.length!=0" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             
-            <div class="col mb-5">
-                <div class="card h-100">
+            <div *ngFor="let product of allProducts" class="col mb-5">
+                <div class="card h-100 p-3">
                     <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <img class="card-img-top" style="width: 200px;height: 200px;" [src]="product.image" alt="..." />
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder">Fancy Product</h5>
+                            <h5 class="fw-bolder">{{product.title.slice(0,20)}}...</h5>
                             <!-- Product price-->
-                            $40.00 - $80.00
+                            ${{product.price}}
                         </div>
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-light"><i class="fa-solid fa-heart-circle-minus text-danger"></i></button>
-                            <button class="btn btn-light"><i class="fa-solid fa-cart-plus text-success"></i></button>
+                            <button (click)="removeItem(product._id)" class="btn btn-light"><i class="fa-solid fa-heart-circle-minus text-danger"></i></button>
+                            <button (click)="addToCart(product)" class="btn btn-light"><i class="fa-solid fa-cart-plus text-success"></i></button>
                         </div>
                     </div>
                 </div>

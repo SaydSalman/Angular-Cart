@@ -1,3 +1,4 @@
+<app-header></app-header>
  <!-- Header-->
  <header class="py-5">
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -26,24 +27,25 @@
 <section class="py-2">
     <div class="container px-4 px-lg-5 ">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
-                <div class="card h-100">
+          <div *ngIf="(allProducts | pipe : searchKey).length==0" class="fw-bolder mt-2 text-danger "><h4 class="text-center">Products not found</h4></div>
+            <div *ngFor="let product of allProducts | pipe:searchKey " class="col mb-5">
+                <div class="card h-100 p-2">
                     <!-- Product image-->
-                    <img routerLink="/view/1" style="cursor: pointer;" class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <img width="200px" height="200px" routerLink="/view/{{product.id}}" style="cursor: pointer;" class="card-img-top" [src]="product.image" alt={{product.title}} />
                     <!-- Product details-->
-                    <div class="card-body p-4">
+                    <div class="card-body p-2">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder">Fancy Product</h5>
+                            <h5  class="fw-bolder">{{product.title.slice(0,20)}}...</h5>
                             <!-- Product price-->
-                            $40.00 - $80.00
+                            ${{product.price}}
                         </div>
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-light"><i class="fa-solid fa-heart text-danger"></i></button>
-                            <button class="btn btn-light"><i class="fa-solid fa-cart-plus text-success"></i></button>
+                            <button (click)="addToWishlist(product)" class="btn btn-light"><i class="fa-solid fa-heart text-danger"></i></button>
+                            <button (click)="addToCart(product)" class="btn btn-light"><i class="fa-solid fa-cart-plus text-success"></i></button>
                         </div>
                     </div>
                 </div>
