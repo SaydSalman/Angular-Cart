@@ -10,7 +10,7 @@ export class ApiService {
   searchTerm = new BehaviorSubject("")
   wishlistCount = new BehaviorSubject(0)
   cartCount = new BehaviorSubject(0)
-  SERVER_URL = "http://localhost:3000"
+  SERVER_URL = "https://cart-backend-bpib.onrender.com"
   constructor(private http:HttpClient) { 
     if(sessionStorage.getItem('token')){
       this.getWishlistCount()
